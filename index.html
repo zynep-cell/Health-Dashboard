@@ -93,10 +93,15 @@
             cursor: pointer;
         }
 
-        /* Button */
+        /* Buton Grubu */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* Genel Buton Stili */
         button {
-            background-color: #f97316;
-            color: white;
             border: none;
             padding: 12px 20px;
             font-size: 1.1em;
@@ -104,10 +109,25 @@
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.2s;
-            margin-top: 10px;
+            flex: 1; /* Butonları eşit genişliğe yay */
         }
-        button:hover {
+
+        /* Hesapla Butonu */
+        .btn-calc {
+            background-color: #f97316;
+            color: white;
+        }
+        .btn-calc:hover {
             background-color: #ea580c;
+        }
+
+        /* Temizle Butonu */
+        .btn-clear {
+            background-color: #9ca3af; /* Gri ton */
+            color: white;
+        }
+        .btn-clear:hover {
+            background-color: #6b7280;
         }
 
         /* Tablo Stilleri */
@@ -127,19 +147,17 @@
             font-weight: 700;
         }
 
-        /* Feedback Box - Farkındalık Kartı Stili (eskihtml.html stili korundu) */
+        /* Feedback Box */
         .feedback-box {
-            background-color: #fff8e1; /* Sarımsı arka plan */
-            border: 1px solid #ffe082; /* Koyu sarı kenarlık */
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
             padding: 20px;
             border-radius: 8px;
-            /* white-space: pre-line;  <- innerHTML kullanacağımız için bunu kaldırıyoruz veya <br> kullanıyoruz */
             line-height: 1.6;
             font-size: 1rem;
             min-height: 150px;
         }
         
-        /* Liste öğeleri gibi görünen paragraflar için */
         .feedback-item {
             margin-bottom: 10px;
         }
@@ -148,7 +166,7 @@
             font-weight: bold;
             font-size: 1.1rem;
             margin-bottom: 15px;
-            color: #d35400; /* Turuncu başlık rengi */
+            color: #d35400;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -169,79 +187,86 @@
 
     <div class="row">
         <div class="column">
-            <div>
-                <label for="gender">Cinsiyet</label>
-                <select id="gender">
-                    <option value="Erkek">Erkek</option>
-                    <option value="Kadın">Kadın</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="age">Yaş</label>
-                <input type="number" id="age" value="30">
-            </div>
-
-            <div>
-                <label for="boy">Boy (m) - Örn: 1.75</label>
-                <input type="number" id="boy" step="0.01" value="1.75">
-            </div>
-
-            <div>
-                <label for="kilo">Kilo (kg)</label>
-                <input type="number" id="kilo" value="70">
-            </div>
-
-            <div class="slider-container">
-                <label for="stress">Stres Seviyesi (0-10)</label>
-                <input type="range" id="stress" min="0" max="10" step="1" value="5" oninput="document.getElementById('stress-val').innerText = this.value">
-                <div class="slider-val">Değer: <span id="stress-val">5</span></div>
-            </div>
-
-            <div>
-                <label for="activity">Fiziksel Aktivite (dakika)</label>
-                <input type="number" id="activity" value="30">
-            </div>
-
-            <div>
-                <label for="sleep">Uyku Süresi (saat)</label>
-                <input type="number" id="sleep" value="7">
-            </div>
-
-            <div>
-                <label>Sigara İçiyor mu?</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="sigara" value="Evet"> Evet</label>
-                    <label><input type="radio" name="sigara" value="Hayır" checked> Hayır</label>
+            <form id="healthForm" onsubmit="return false;">
+                <div>
+                    <label for="gender">Cinsiyet</label>
+                    <select id="gender">
+                        <option value="" disabled selected>Seçiniz</option>
+                        <option value="Erkek">Erkek</option>
+                        <option value="Kadın">Kadın</option>
+                    </select>
                 </div>
-            </div>
 
-            <div>
-                <label for="su">Günlük Su Tüketimi (mL)</label>
-                <input type="number" id="su" value="2000">
-            </div>
+                <div>
+                    <label for="age">Yaş</label>
+                    <input type="number" id="age" placeholder="Örn: 30">
+                </div>
 
-            <div>
-                <label for="bagirsak">Bağırsak Alışkanlığı</label>
-                <select id="bagirsak">
-                    <option value="Düzenli">Düzenli</option>
-                    <option value="Kabız">Kabız</option>
-                    <option value="İshal">İshal</option>
-                    <option value="Düzensiz">Düzensiz</option>
-                </select>
-            </div>
+                <div>
+                    <label for="boy">Boy (m) - Örn: 1.75</label>
+                    <input type="number" id="boy" step="0.01" placeholder="Örn: 1.75">
+                </div>
 
-            <div>
-                <label for="systolic">Sistolik Kan Basıncı (Büyük Tansiyon)</label>
-                <input type="number" id="systolic" value="120">
-            </div>
+                <div>
+                    <label for="kilo">Kilo (kg)</label>
+                    <input type="number" id="kilo" placeholder="Örn: 70">
+                </div>
 
-            <div>
-                <label for="diastolic">Diyastolik Kan Basıncı (Küçük Tansiyon)</label>
-                <input type="number" id="diastolic" value="80">
-            </div>
+                <div class="slider-container">
+                    <label for="stress">Stres Seviyesi (0-10)</label>
+                    <input type="range" id="stress" min="0" max="10" step="1" value="5" oninput="document.getElementById('stress-val').innerText = this.value">
+                    <div class="slider-val">Değer: <span id="stress-val">5</span></div>
+                </div>
 
-            <button onclick="calculateRisk()">Hesapla</button>
+                <div>
+                    <label for="activity">Fiziksel Aktivite (dakika)</label>
+                    <input type="number" id="activity" placeholder="Örn: 30">
+                </div>
+
+                <div>
+                    <label for="sleep">Uyku Süresi (saat)</label>
+                    <input type="number" id="sleep" placeholder="Örn: 7">
+                </div>
+
+                <div>
+                    <label>Sigara İçiyor mu?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="sigara" value="Evet"> Evet</label>
+                        <label><input type="radio" name="sigara" value="Hayır"> Hayır</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="su">Günlük Su Tüketimi (mL)</label>
+                    <input type="number" id="su" placeholder="Örn: 2000">
+                </div>
+
+                <div>
+                    <label for="bagirsak">Bağırsak Alışkanlığı</label>
+                    <select id="bagirsak">
+                        <option value="" disabled selected>Seçiniz</option>
+                        <option value="Düzenli">Düzenli</option>
+                        <option value="Kabız">Kabız</option>
+                        <option value="İshal">İshal</option>
+                        <option value="Düzensiz">Düzensiz</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="systolic">Sistolik Kan Basıncı (Büyük Tansiyon)</label>
+                    <input type="number" id="systolic" placeholder="Örn: 120">
+                </div>
+
+                <div>
+                    <label for="diastolic">Diyastolik Kan Basıncı (Küçük Tansiyon)</label>
+                    <input type="number" id="diastolic" placeholder="Örn: 80">
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn-calc" onclick="calculateRisk()">Hesapla</button>
+                    <button class="btn-clear" onclick="clearForm()">Temizle</button>
+                </div>
+            </form>
         </div>
 
         <div class="column">
@@ -262,7 +287,7 @@
             <div class="feedback-box">
                 <div class="feedback-title">💡 Farkındalık Kartı ve Kritik Mesajlar</div>
                 <div id="farkindalik_text">
-                    Sonuçları görmek için "Hesapla" butonuna basınız.
+                    Sonuçları görmek için bilgilerinizi girip "Hesapla" butonuna basınız.
                 </div>
             </div>
         </div>
@@ -344,7 +369,6 @@
     function farkindalik_mesaji(bmi, bp_cat, stres, aktivite, uyku, sigara, su, bagirsak, risk_flag) {
         let mesajlar = [];
 
-        // Yardımcı fonksiyon: HTML formatında satır ekler
         function ekle(baslik, mesaj) {
             mesajlar.push(`<div class="feedback-item"><strong>${baslik}:</strong> ${mesaj}</div>`);
         }
@@ -363,7 +387,7 @@
         // KAN BASINCI
         if (bp_cat === "Normal") {
             ekle("Kan Basıncı", "Normal düzeydedir — düzenli ölçüm ve sağlıklı yaşam alışkanlıklarına devam edin. ❤️");
-        } else if (bp_cat === "Elevated") {
+        } else if (bp_cat === "Elevated" || bp_cat === "Normal-Yüksek") {
             ekle("Kan Basıncı", "Yükselme eğilimindedir; tuz tüketimini azaltmanız ve aktiviteyi artırmanız önerilir. 🧂");
         } else if (bp_cat === "Prehipertansiyon") {
             ekle("Kan Basıncı", "Prehipertansiyon düzeyindesiniz; kilo kontrolü, tuz kısıtlaması ve egzersiz önemlidir. 🚶‍♂️");
@@ -431,20 +455,39 @@
     // Ana Hesaplama Fonksiyonu
     // ----------------------
     function calculateRisk() {
-        // Girdileri al
-        const gender = document.getElementById('gender').value;
-        const age = parseFloat(document.getElementById('age').value);
-        const boy = parseFloat(document.getElementById('boy').value);
-        const kilo = parseFloat(document.getElementById('kilo').value);
-        const stress = parseInt(document.getElementById('stress').value);
-        const activity = parseFloat(document.getElementById('activity').value);
-        const sleep = parseFloat(document.getElementById('sleep').value);
-        
-        const sigaraVal = document.querySelector('input[name="sigara"]:checked').value;
-        const su = parseFloat(document.getElementById('su').value);
-        const bagirsak = document.getElementById('bagirsak').value;
-        const systolic = parseFloat(document.getElementById('systolic').value);
-        const diastolic = parseFloat(document.getElementById('diastolic').value);
+        // Form Elemanlarını Al
+        const genderEl = document.getElementById('gender');
+        const ageEl = document.getElementById('age');
+        const boyEl = document.getElementById('boy');
+        const kiloEl = document.getElementById('kilo');
+        const stressEl = document.getElementById('stress');
+        const activityEl = document.getElementById('activity');
+        const sleepEl = document.getElementById('sleep');
+        const sigaraEl = document.querySelector('input[name="sigara"]:checked');
+        const suEl = document.getElementById('su');
+        const bagirsakEl = document.getElementById('bagirsak');
+        const systolicEl = document.getElementById('systolic');
+        const diastolicEl = document.getElementById('diastolic');
+
+        // Validasyon: Basit bir kontrol (Eğer temel alanlar boşsa uyarı ver)
+        if (!genderEl.value || !ageEl.value || !boyEl.value || !kiloEl.value || !activityEl.value || !sleepEl.value || !sigaraEl || !suEl.value || !bagirsakEl.value || !systolicEl.value || !diastolicEl.value) {
+            alert("Lütfen tüm alanları doldurunuz ve seçimlerinizi yapınız.");
+            return;
+        }
+
+        // Değerleri Parse Et
+        const gender = genderEl.value;
+        const age = parseFloat(ageEl.value);
+        const boy = parseFloat(boyEl.value);
+        const kilo = parseFloat(kiloEl.value);
+        const stress = parseInt(stressEl.value);
+        const activity = parseFloat(activityEl.value);
+        const sleep = parseFloat(sleepEl.value);
+        const sigaraVal = sigaraEl.value;
+        const su = parseFloat(suEl.value);
+        const bagirsak = bagirsakEl.value;
+        const systolic = parseFloat(systolicEl.value);
+        const diastolic = parseFloat(diastolicEl.value);
 
         // Hesaplamalar
         const bmi = kilo / (boy ** 2);
@@ -502,8 +545,25 @@
             tbody.appendChild(tr);
         });
 
-        // Farkındalık Metnini Güncelle (innerHTML kullanarak kalın yazıları aktif ediyoruz)
+        // Farkındalık Metnini Güncelle
         document.getElementById("farkindalik_text").innerHTML = farkindalik;
+    }
+
+    // ----------------------
+    // Form Temizleme Fonksiyonu
+    // ----------------------
+    function clearForm() {
+        // Form elementini al ve resetle (Inputlar ve Selectler temizlenir)
+        document.getElementById("healthForm").reset();
+
+        // Slider değerini görsel olarak güncelle (Varsayılan 5'e dönecek)
+        document.getElementById("stress-val").innerText = "5";
+
+        // Tabloyu Temizle
+        document.querySelector("#resultTable tbody").innerHTML = "";
+
+        // Farkındalık Alanını Sıfırla
+        document.getElementById("farkindalik_text").innerText = "Sonuçları görmek için bilgilerinizi girip 'Hesapla' butonuna basınız.";
     }
 </script>
 
